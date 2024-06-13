@@ -114,16 +114,15 @@ export default function App() {
 
 	return (
 	<>
-			<form>
-				<div className="test">
-					<input type="text" placeholder="API key" value={myKey} onChange={(e) => setMyKey(e.target.value)} aria-label="apikey" />
-					<input type="submit" value="Get list" onClick={fetchData}></input>
-				</div>
-			</form>
+
 			{globalArray ? (
 				<table>
+          <caption></caption>
 					<thead>
 					<tr>
+            <th colspan="7"><h1 className="date">{today.format("dddd, MMM D")}</h1></th>
+          </tr>
+          <tr>
 						<th className="checkbox">In for nap</th>
 						<th className="checkbox">Out from nap</th>
 						<th className="checkbox">Picked Up</th>
@@ -141,7 +140,7 @@ export default function App() {
 							<td className="checkbox">{data.type.includes("Only") ? "N/A" : ""}</td>
 							<td className="checkbox">{data.end.includes(":") ? "" : "N/A"}</td>
 							<td className="inTime">{!data.hasCheckedIn ? data.start.format("hh:mm") : "Here"} </td>
-							<td className="name">{data.dog_name + " " + data.owner_last}</td>
+							<td className="name">{data.dog_name + " " + data.owner_last}{data.type.includes("Eval") ? " (Eval)" : ""}</td>
 							<td className="breed">{data.dog_breed}</td>
 							<td className="outTime">{data.end}</td>
 						</tr>
@@ -149,7 +148,14 @@ export default function App() {
 					</tbody>
 				</table>
 				)
-				: <div className="error">Enter API key</div>
+				: 
+            <form>
+            <div className="error">Enter API key:    
+                <input type="text" placeholder="API key" value={myKey} onChange={(e) => setMyKey(e.target.value)} aria-label="apikey" />
+            </div>
+					  <input type="submit" value="Get list" onClick={fetchData} className="test"></input>
+			      </form>
+         
 			}		
 		</>
 		);

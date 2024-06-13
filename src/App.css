@@ -1,18 +1,14 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-size: small;
 }
 
 table{
 	border: 1px solid black;
 	border-collapse: collapse;
-	
 	table-layout: fixed;
-	
-	
-	
 	margin-left: auto;
   margin-right: auto;
 }
@@ -20,14 +16,18 @@ th, td {
 	border: 1px solid black;
 	padding: 5px;
 }
+.date {
+  margin: 0;
+}
+.name, .breed {
+  text-align: left;
+}
 
 .count {
-	text-align: center;
 	width: 20px;
 }
 
 .time {
-	text-align: center;
 	width: 70px;
 }
 
@@ -35,7 +35,7 @@ th, td {
 .test, .error {
 	width: 25%;
 	margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 }
 
 
