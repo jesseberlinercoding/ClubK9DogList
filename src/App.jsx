@@ -4,30 +4,20 @@ import dayjs from 'dayjs';
 export default function App() {
 
 	const [globalArray, setGlobalArray] = useState(null);
-	const [myKey, setMyKey] = useState(() => {
-		// getting stored value
-		const saved = localStorage.getItem("myKey");
-		const initialValue = JSON.parse(saved);
-		return initialValue || "";
-	});
+
 	
 	const today = dayjs();
 	
-	
-	useEffect(() => {
-		localStorage.setItem("myKey", JSON.stringify(myKey));
-	}, [myKey]);
-	
-
-	
+  function ignore(e) {
+    e.preventDefault();
+  }
 	
 	
 	async function fetchData(e) {
-		e.preventDefault();
 		
-		let pass = myKey;
+		let pass = e.target.value;
 		
-		if (pass !== '') {
+    if (pass !== '') {
 			const url = 'https://club-k9.gingrapp.com/api/v1/reservations?key=' + pass;
 			
 			const dayFormatted = today.format('YYYY-MM-DD');
@@ -48,6 +38,7 @@ export default function App() {
 				
 			}
 			catch (error) {
+        console.log(error);
 				alert("invalid key");
 			}
 		}
@@ -96,10 +87,6 @@ export default function App() {
 
       
       if(dogRes.dog_name.includes(dogRes.owner_last)){
-        // dogRes.dog_name.substring(0, dogRes.dog_name.index(dogRes.owner_last)-1).trim();
-        
-        //let correctedDogName = ;
-        //console.log(correctedDogName);
         dogRes = {...dogRes, dog_name: dogRes.dog_name.replace(dogRes.owner_last, "").trim()};
       }
 
@@ -120,7 +107,7 @@ export default function App() {
           <caption></caption>
 					<thead>
 					<tr>
-            <th colspan="7"><h1 className="date">{today.format("dddd, MMM D")}</h1></th>
+            <th colSpan="7"><h1 className="date">{today.format("dddd, MMM D")}</h1></th>
           </tr>
           <tr>
 						<th className="checkbox">In for nap</th>
@@ -151,9 +138,9 @@ export default function App() {
 				: 
             <form>
             <div className="error">Enter API key:    
-                <input type="text" placeholder="API key" value={myKey} onChange={(e) => setMyKey(e.target.value)} aria-label="apikey" />
+                <input type="text" placeholder="API key" onBlur={fetchData} aria-label="apikey" />
             </div>
-					  <input type="submit" value="Get list" onClick={fetchData} className="test"></input>
+					  <input type="submit" value="Get list" onClick={ignore} className="test"></input>
 			      </form>
          
 			}		
