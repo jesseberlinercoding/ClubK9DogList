@@ -126,7 +126,7 @@ export default function App() {
 							<td className="checkbox">{data.type.includes("Only") ? "N/A" : ""}</td>
 							<td className="checkbox">{data.type.includes("Only") ? "N/A" : ""}</td>
 							<td className="checkbox">{data.end.includes(":") ? "" : "N/A"}</td>
-							<td className="inTime">{!data.hasCheckedIn ? data.start.format("hh:mm") : "Here"} </td>
+							<td className="inTime">{!data.hasCheckedIn ? data.start.format("h:mm a") : "Here"} </td>
 							<td className="name">{data.dog_name + " " + data.owner_last}{data.type.includes("Eval") ? " (Eval)" : ""}</td>
 							<td className="breed">{data.dog_breed}</td>
 							<td className="outTime">{data.end}</td>
